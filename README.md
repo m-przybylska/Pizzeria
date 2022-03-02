@@ -11,4 +11,4 @@ Miejsc dla klientów jest 5. Może istnieć kolejka klientów.
 czy będą różne rodzaje pizzy? dodatkowo jak to będzie z zamówieniami? czy zwiekszami okresowo długość pieczenia?
 
 Wątki: Kucharze, piec, klienci
-Zasoby: stół, stoliki (dla klientów), piec, konto restauracji, miejsce ze składnikami (do przygotowywania pizzy)
+Zasoby: stół, stoliki (dla klientów), piec, konto restauracji, miejsce ze składnikami (do przygotowywania pizzy)  
