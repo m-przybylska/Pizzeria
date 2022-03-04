@@ -14,9 +14,9 @@ Półka może pomieścić maksymalnie 20 pudełek, inaczej piramida robi się za
 Dostawcy mogą pomieścić w torbie termicznej na jedzenie maksymalnie 8 pudełek i nie ruszają się dopóki nie ma tych 8, żeby bez sensu
 nie jeżdzić z 1 pizzą. 
 
-Wątki: kucharze, dostawcy, piec
-Zasoby: umywalka, składniki, piec, pudełka, torba termiczna
-Sekcje krytyczne: mycie rąk, przygotowanie pizzy, wkładanie jej do pieca, układanie na półce, pakowanie do plecaka
+Wątki: kucharze, dostawcy, piec \
+Zasoby: umywalka, składniki, piec, pudełka, torba termiczna \
+Sekcje krytyczne: mycie rąk, przygotowanie pizzy, wkładanie jej do pieca, układanie na półce, pakowanie do plecaka \
 
 Możliwe zagrożenia:
 Nie powstanie żadna pizza, kucharze nigdy nie umyją rąk, pizze na półce się przewrócą, nigdy nie powstanie wystarcząjąco dużo pizz,
