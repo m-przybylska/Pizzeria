@@ -2,4 +2,8 @@
 // Created by admin on 25.03.2022.
 //
 
-#include "Main.h"
+#include "SimulationModel.h"
+
+int main(){
+    SimulationModel *simulationModel = new SimulationModel();
+}

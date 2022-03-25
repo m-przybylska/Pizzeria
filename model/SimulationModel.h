@@ -1,16 +1,18 @@
 //
-// Created by admin on 25.03.2022.
+// Created by Magda on 25.03.2022.
 //
 
 #ifndef UNTITLED4_SIMULATIONMODEL_H
 #define UNTITLED4_SIMULATIONMODEL_H
 
 
-
 class SimulationModel {
+public:
+    SimulationModel();
+
+    virtual ~SimulationModel();
 
 };
 
 
-
-#endif //UNTITLED4_SIMULATIONMODEL_H
+#endif
