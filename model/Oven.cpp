@@ -28,9 +28,11 @@ int Oven::takeOut(int type) {
 }
 
 void Oven::bakeAll() {
-    std::lock_guard<std::mutex> guard(notBakedMutex);
-    for (pizza& pizza: notBaked){
-        pizza.bake();
+    if(notBaked.size < 5) {
+        std::lock_guard <std::mutex> guard(notBakedMutex);
+        for (pizza &pizza: notBaked) {
+            pizza.bake();
+        }
     }
 }
 
