@@ -10,11 +10,11 @@ Oven::~Oven() {
 
 }
 
-void Oven::putIn(int type) {
+void Oven::putIn() {
     std::lock_guard<std::mutex> guard(notBakedMutex);
 }
 
-int Oven::takeOut(int type) {
+int Oven::takeOut() {
     int takenOut = 0;
     std::lock_guard<std::mutex> guard(notBakedMutex);
     for (auto it = notBaked.begin(); it != notBaked.end(); ++it){
@@ -28,7 +28,7 @@ int Oven::takeOut(int type) {
 }
 
 void Oven::bakeAll() {
-    if(notBaked.size < 5) {
+    if(notBaked.size() < 5) {
         std::lock_guard <std::mutex> guard(notBakedMutex);
         for (pizza &pizza: notBaked) {
             pizza.bake();
@@ -57,4 +57,3 @@ int Oven::getSize(){
     std::lock_guard<std::mutex> guard(notBakedMutex);
     return notBaked.size();
 }
-

@@ -8,6 +8,12 @@
 #include <mutex>
 #include <vector>
 
+#ifndef UNTITLED4_OVEN_H
+#define UNTITLED4_OVEN_H
+#include <thread>
+#include <mutex>
+#include <vector>
+
 class Oven{
         struct pizza {
             int timeDoEndBacking;
@@ -31,9 +37,9 @@ public:
 
     virtual ~Oven();
 
-    void putIn(int type);
+    void putIn();
 
-    int takeOut(int type);
+    int takeOut();
 
     void bakeAll();
 
@@ -50,4 +56,3 @@ public:
 
 
 #endif
-

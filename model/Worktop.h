@@ -7,10 +7,16 @@
 
 
 class Worktop {
+    bool isLocked = false;
+
 public:
     Worktop();
 
     virtual ~Worktop();
+
+    void startUsing();
+    void stopUsing();
+    bool isBeingUsed();
 
 };
 
