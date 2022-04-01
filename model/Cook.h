@@ -25,7 +25,7 @@ class Cook {
         OVEN,
         SHELF,
         WAIT
-    }
+    };
 
     const std::string cookActionTag[5] = {"sink", "worktop", "oven", "shelf", "wait"};
 
@@ -34,21 +34,22 @@ class Cook {
     static condition_variable queueOvenCV;
 
     static int numberOfCooks; 
+    int numberOfBaked;
 
     atomic<bool> isAlive;
     int numberOfCook = -1;
     thread life;
 
-    atomic<int> actuallyProducing;
     atomic<cookAction> action;
     atomic<int> progress;
 
 public:
     static deque<int> queueSink;
-    static deque<int> queueTable;
+    static deque<int> queueWorktop;
     static deque<int> queueOven;
 
     Cook();
+    Cook(const Cook& cook);
     virtual ~Cook();
 
     void useSink(Sink *sink);
@@ -57,7 +58,7 @@ public:
     void useShelf(Shelf *shelf);
 
     void sleep(int min, int max);
-    void random(int min, int max);
+    int random(int min, int max);
     void live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf);
 
     int getNumberOfCook() const;

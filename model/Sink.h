@@ -7,10 +7,16 @@
 
 
 class Sink {
+    bool isLocked = false;
+
 public:
     Sink();
 
     virtual ~Sink();
+
+    void startUsing();
+    void stopUsing();
+    bool isBeingUsed();
 
 };
 

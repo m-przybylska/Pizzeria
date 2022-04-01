@@ -2,14 +2,30 @@
 // Created by Magda on 25.03.2022.
 //
 
+#include <random>
+#include <iostream>
 #include "Cook.h"
+
+int Cook::numberOfCooks = 0;
+
+std::deque<int> Cook::queueSink;
+std::deque<int> Cook::queueWorktop;
+std::deque<int> Cook::queueOven;
+std::condition_variable Cook::queueSinkCV;
+std::condition_variable Cook::queueWorktopCV;
+std::condition_variable Cook::queueOvenCV;
+
+using namespace std;
 
 Cook::Cook() {
     this->numberOfCook = this->numberOfCooks++;
-    actuallyProducing = -1;
     isAlive = false;
     action = WAIT;
     progress = 0;
+}
+
+Cook::Cook(const Cook &Cook){
+    this->numberOfCook = Cook.numberOfCook;
 }
 
 Cook::~Cook() {
@@ -21,16 +37,11 @@ Cook::~Cook() {
 void Cook::useSink(Sink *sink){
     action = WAIT;
 
-    actuallyProducing = random(0, typesOfBakedGoods-1);
-
-    queueSinkMutex.lock();
     queueSink.push_back(numberOfCook);
-    queueSinkMutex.unlock();
 
-    {
-        std::unique_lock<std::mutex> lck(queueSinkMutex);
-        queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
-    }
+    // {
+    //     queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
+    // }
 
     if (!isAlive){
         queueSinkCV.notify_all();
@@ -44,9 +55,7 @@ void Cook::useSink(Sink *sink){
 
     action = WAIT;
 
-    queueSinkMutex.lock();
     queueSink.pop_front();
-    queueSinkMutex.unlock();
 
     queueSinkCV.notify_all();
 
@@ -55,14 +64,12 @@ void Cook::useSink(Sink *sink){
 void Cook::useWorktop(Worktop *worktop){
     action = WAIT;
 
-    queueWorktopMutex.lock();
     queueWorktop.push_back(numberOfCook);
-    queueWorktopMutex.unlock();
 
-    {
-        std::unique_lock<std::mutex> lck(queueWorktopMutex);
-        queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
-    }
+    // {
+    //     std::unique_lock<std::mutex> lck(queueWorktopMutex);
+    //     queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
+    // }
 
     if (!isAlive){
         queueWorktopCV.notify_all();
@@ -77,9 +84,7 @@ void Cook::useWorktop(Worktop *worktop){
 
     action = WAIT;
 
-    queueWorktopMutex.lock();
     queueWorktop.pop_front();
-    queueWorktopMutex.unlock();
 
     queueWorktopCV.notify_all();
 }
@@ -87,49 +92,56 @@ void Cook::useWorktop(Worktop *worktop){
 void Cook::useOven(Oven *oven){
     action = WAIT;
 
-    queueOvenMutex.lock();
-    queueOven.push_back(id);
-    queueOvenMutex.unlock();
+    queueOven.push_back(numberOfCook);
 
-    {
-        std::unique_lock<std::mutex> lck(queueOvenMutex);
-        queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
-    }
+    // {
+    //     std::unique_lock<std::mutex> lck(queueOvenMutex);
+    //     queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
+    // }
 
     if (!isAlive){
         queueOvenCV.notify_all();
         return;
     }
 
-    oven->putIn(actuallyProducing);
+    oven->putIn();
     action = OVEN;
     sleep(500,1000);
-    for (int i = 0; i < typesOfBakedGoods; i++){
-        numberOfBakedGoods[i] = oven->takeOut(i);
-    }
+
+    numberOfBaked = oven->takeOut();
     action = WAIT;
 
-    queueOvenMutex.lock();
     queueOven.pop_front();
-    queueOvenMutex.unlock();
 
     queueOvenCV.notify_all();
 }
 
-void Cook::useShelf(Shelf *shelf){
+void Cook::useShelf(Shelf *shelf)
+{
     action = SHELF;
-    for (int i = 0; i < typesOfBakedGoods; i++){
-        shelf->addBread(i,numberOfBakedGoods[i]);
-        numberOfBakedGoods[i] = 0;
-        sleep(100,500);
-    }
+
+    shelf->add(numberOfBaked);
+    sleep(100, 500);
     action = WAIT;
+}
+
+int Cook::random(const int min, const int max) {
+    static thread_local mt19937* generator = nullptr;
+    static hash<thread::id> hasher;
+
+    if (!generator) {
+        generator = new mt19937(clock() + hasher(this_thread::get_id()));
+    }
+    uniform_int_distribution<int> distribution(min, max);
+
+    return distribution(*generator);
 }
 
 void Cook::sleep(int min, int max){
     int s = random(min,max)/100;
+
     for (int i = 0; i < s; i++){
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        this_thread::sleep_for(chrono::milliseconds(100));
         this->progress = 100*i/s;
 
         if (!this->isAlive) {
@@ -164,13 +176,9 @@ int Cook::getProgress() const{
     return progress;
 }
 
-int Cook::getActuallyProducing() const{
-    RETURN actuallyProducing;
-}
-
 void Cook::start(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
     isAlive = true;
-    life = std::thread(&Cook::live, this, sink, worktop, oven, shelf);
+    life = thread(&Cook::live, this, sink, worktop, oven, shelf);
 }
 
 void Cook::stop(){

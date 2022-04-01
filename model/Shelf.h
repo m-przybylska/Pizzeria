@@ -7,10 +7,15 @@
 
 
 class Shelf {
+    int pizzas;
+
 public:
     Shelf();
-
     virtual ~Shelf();
+    
+    void add(int amount);
+    bool take();
+    int get();
 
 };
 
