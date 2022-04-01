@@ -10,8 +10,6 @@ class SimulationModel {
 public:
     SimulationModel();
 
-    virtual ~SimulationModel();
-
 };
 
 

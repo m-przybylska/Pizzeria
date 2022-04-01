@@ -15,7 +15,9 @@ public:
     virtual ~Worktop();
 
     void startUsing();
+
     void stopUsing();
+
     bool isBeingUsed();
 
 };

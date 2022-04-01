@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target Systemy_operacyjne_2__projekt
 
@@ -49,66 +49,66 @@ cmake_ninja_workdir = C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ pro
 
 build cmake_object_order_depends_target_Systemy_operacyjne_2__projekt: phony || CMakeFiles/Systemy_operacyjne_2__projekt.dir
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Cook.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/Cook.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Cook.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/Cook.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\Cook.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/DeliveryMan.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/DeliveryMan.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/DeliveryMan.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/DeliveryMan.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\DeliveryMan.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Oven.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/Oven.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Oven.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/Oven.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\Oven.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Shelf.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/Shelf.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Shelf.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/Shelf.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\Shelf.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/SimulationModel.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/SimulationModel.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/SimulationModel.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/SimulationModel.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\SimulationModel.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Sink.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/Sink.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Sink.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/Sink.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\Sink.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/ThermalBag.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/ThermalBag.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/ThermalBag.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/ThermalBag.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\ThermalBag.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Worktop.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/model/Worktop.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/model/Worktop.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model/Worktop.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model\Worktop.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir\model
 
-build CMakeFiles/Systemy_operacyjne_2__projekt.dir/Main.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/Systemy$ operacyjne$ 2-$ projekt/Main.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
+build CMakeFiles/Systemy_operacyjne_2__projekt.dir/Main.cpp.obj: CXX_COMPILER__Systemy_operacyjne_2__projekt_Debug C$:/Users/admin/CLionProjects/systemy_operacyjne_projekt/Main.cpp || cmake_object_order_depends_target_Systemy_operacyjne_2__projekt
   DEP_FILE = CMakeFiles\Systemy_operacyjne_2__projekt.dir\Main.cpp.obj.d
   FLAGS = -g -std=gnu++14
-  INCLUDES = -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/." -I"C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/model"
+  INCLUDES = -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/. -IC:/Users/admin/CLionProjects/systemy_operacyjne_projekt/model
   OBJECT_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
   OBJECT_FILE_DIR = CMakeFiles\Systemy_operacyjne_2__projekt.dir
 
@@ -135,7 +135,7 @@ build Systemy_operacyjne_2__projekt.exe: CXX_EXECUTABLE_LINKER__Systemy_operacyj
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "C:\Users\admin\CLionProjects\Systemy operacyjne 2- projekt\cmake-build-debug" && "C:\Program Files\JetBrains\CLion 2021.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\admin\CLionProjects\systemy_operacyjne_projekt\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -146,7 +146,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "C:\Users\admin\CLionProjects\Systemy operacyjne 2- projekt\cmake-build-debug" && "C:\Program Files\JetBrains\CLion 2021.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S"C:\Users\admin\CLionProjects\Systemy operacyjne 2- projekt" -B"C:\Users\admin\CLionProjects\Systemy operacyjne 2- projekt\cmake-build-debug""
+  COMMAND = cmd.exe /C "cd /D C:\Users\admin\CLionProjects\systemy_operacyjne_projekt\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2021.3\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\Users\admin\CLionProjects\systemy_operacyjne_projekt -BC:\Users\admin\CLionProjects\systemy_operacyjne_projekt\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -164,7 +164,7 @@ build Systemy_operacyjne_2__projekt: phony Systemy_operacyjne_2__projekt.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/admin/CLionProjects/Systemy operacyjne 2- projekt/cmake-build-debug
+# Folder: C:/Users/admin/CLionProjects/systemy_operacyjne_projekt/cmake-build-debug
 
 build all: phony Systemy_operacyjne_2__projekt.exe
 

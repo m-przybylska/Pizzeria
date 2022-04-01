@@ -24,17 +24,17 @@ Cook::Cook() {
     progress = 0;
 }
 
-Cook::Cook(const Cook &Cook){
+Cook::Cook(const Cook &Cook) {
     this->numberOfCook = Cook.numberOfCook;
 }
 
 Cook::~Cook() {
-    if (life.joinable()){
+    if (life.joinable()) {
         life.join();
     }
 }
 
-void Cook::useSink(Sink *sink){
+void Cook::useSink(Sink *sink) {
     action = WAIT;
 
     queueSink.push_back(numberOfCook);
@@ -43,14 +43,14 @@ void Cook::useSink(Sink *sink){
     //     queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
     // }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueSinkCV.notify_all();
         return;
     }
 
     sink->startUsing();
     action = SINK;
-    sleep(500,2000);
+    sleep(500, 2000);
     sink->stopUsing();
 
     action = WAIT;
@@ -61,7 +61,7 @@ void Cook::useSink(Sink *sink){
 
 }
 
-void Cook::useWorktop(Worktop *worktop){
+void Cook::useWorktop(Worktop *worktop) {
     action = WAIT;
 
     queueWorktop.push_back(numberOfCook);
@@ -71,7 +71,7 @@ void Cook::useWorktop(Worktop *worktop){
     //     queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
     // }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueWorktopCV.notify_all();
         return;
     }
@@ -79,7 +79,7 @@ void Cook::useWorktop(Worktop *worktop){
 
     worktop->startUsing();
     action = WORKTOP;
-    sleep(1000,3000);
+    sleep(1000, 3000);
     worktop->stopUsing();
 
     action = WAIT;
@@ -89,7 +89,7 @@ void Cook::useWorktop(Worktop *worktop){
     queueWorktopCV.notify_all();
 }
 
-void Cook::useOven(Oven *oven){
+void Cook::useOven(Oven *oven) {
     action = WAIT;
 
     queueOven.push_back(numberOfCook);
@@ -99,14 +99,14 @@ void Cook::useOven(Oven *oven){
     //     queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
     // }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueOvenCV.notify_all();
         return;
     }
 
     oven->putIn();
     action = OVEN;
-    sleep(500,1000);
+    sleep(500, 1000);
 
     numberOfBaked = oven->takeOut();
     action = WAIT;
@@ -116,8 +116,7 @@ void Cook::useOven(Oven *oven){
     queueOvenCV.notify_all();
 }
 
-void Cook::useShelf(Shelf *shelf)
-{
+void Cook::useShelf(Shelf *shelf) {
     action = SHELF;
 
     shelf->add(numberOfBaked);
@@ -126,7 +125,7 @@ void Cook::useShelf(Shelf *shelf)
 }
 
 int Cook::random(const int min, const int max) {
-    static thread_local mt19937* generator = nullptr;
+    static thread_local mt19937 *generator = nullptr;
     static hash<thread::id> hasher;
 
     if (!generator) {
@@ -137,12 +136,12 @@ int Cook::random(const int min, const int max) {
     return distribution(*generator);
 }
 
-void Cook::sleep(int min, int max){
-    int s = random(min,max)/100;
+void Cook::sleep(int min, int max) {
+    int s = random(min, max) / 100;
 
-    for (int i = 0; i < s; i++){
+    for (int i = 0; i < s; i++) {
         this_thread::sleep_for(chrono::milliseconds(100));
-        this->progress = 100*i/s;
+        this->progress = 100 * i / s;
 
         if (!this->isAlive) {
             return;
@@ -150,8 +149,8 @@ void Cook::sleep(int min, int max){
     }
 }
 
-void Cook::live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
-    while(this->isAlive){
+void Cook::live(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf) {
+    while (this->isAlive) {
         action = WAIT;
         useSink(sink);
         useWorktop(worktop);
@@ -160,27 +159,27 @@ void Cook::live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
     }
 }
 
-int Cook::getNumberOfCook() const{
+int Cook::getNumberOfCook() const {
     return numberOfCook;
 }
 
-int Cook::getIsAlive() const{
+int Cook::getIsAlive() const {
     return isAlive;
 }
 
-string Cook::getAction(){
+string Cook::getAction() {
     return cookActionTag[action];
 }
 
-int Cook::getProgress() const{
+int Cook::getProgress() const {
     return progress;
 }
 
-void Cook::start(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
+void Cook::start(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf) {
     isAlive = true;
     life = thread(&Cook::live, this, sink, worktop, oven, shelf);
 }
 
-void Cook::stop(){
+void Cook::stop() {
     isAlive = false;
 }
