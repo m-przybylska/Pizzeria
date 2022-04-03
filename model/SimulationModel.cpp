@@ -6,6 +6,7 @@
 
 #include <thread>
 #include <iostream>
+#include <time.h>
 #include <conio.h>
 #include "Shelf.h"
 #include "Oven.h"
@@ -34,20 +35,26 @@ SimulationModel::SimulationModel() {
     Oven oven;
     Sink sink;
     Worktop worktop;
+    unsigned int counter = 0;
 
     std::vector<Cook> cooks;
     for (int i = 0; i < numberOfCooks; i++){
         cooks.emplace_back(Cook());
     }
-    for (Cook& cook: cooks){
+
+        for (Cook& cook: cooks){
         cook.start(&sink, &worktop, &oven, &shelf);
     }
+
+
+
     std::thread ovenT(ovenThread, &oven);
     std::thread end(getQ);
 
     for (Cook& cook: cooks){
         cook.stop();
     }
+
     oven.stop();
     ovenT.join();
     end.join();
