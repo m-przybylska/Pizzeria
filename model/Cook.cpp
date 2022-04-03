@@ -36,7 +36,7 @@ Cook::~Cook() {
 
 void Cook::useSink(Sink *sink) {
     action = WAIT;
-    //cout<< numberOfCook + " : " +getAction()<< endl;
+    cout<< numberOfCook <<  " : " +getAction()<< endl;
 
     mutexSink.lock();
     queueSink.push_back(numberOfCook);
@@ -55,7 +55,7 @@ void Cook::useSink(Sink *sink) {
     sink->startUsing();
     action = SINK;
     sleep(500, 2000);
-    cout<< numberOfCook + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
     sink->stopUsing();
 
     action = WAIT;
@@ -89,7 +89,7 @@ void Cook::useWorktop(Worktop *worktop) {
     action = WORKTOP;
 
     sleep(1000, 3000);
-    cout<< this->numberOfCook + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
     worktop->stopUsing();
 
     action = WAIT;
@@ -103,7 +103,7 @@ void Cook::useWorktop(Worktop *worktop) {
 
 void Cook::useOven(Oven *oven) {
     action = WAIT;
-    //cout<< getNumberOfCook() + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
     mutexOven.lock();
     queueOven.push_back(numberOfCook);
@@ -122,11 +122,11 @@ void Cook::useOven(Oven *oven) {
     oven->putIn();
     action = OVEN;
     sleep(500, 1000);
-    cout<< this->getNumberOfCook() + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
     oven->takeOut();
     action = WAIT;
-    //cout<< getNumberOfCook() + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
     mutexOven.lock();
     queueOven.pop_front();
@@ -137,7 +137,7 @@ void Cook::useOven(Oven *oven) {
 
 void Cook::useShelf(Shelf *shelf) {
     action = SHELF;
-    cout<< numberOfCook + " : " +getAction()<< endl;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
     shelf->add(1);
     sleep(100, 500);

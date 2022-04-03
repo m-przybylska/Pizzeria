@@ -49,8 +49,8 @@ SimulationModel::SimulationModel() {
     std::thread ovenT(ovenThread, &oven);
     std::thread end(getQ);
 
-//    while(simulationOn){
-//   }
+   while(simulationOn){
+   }
 
     for (Cook& cook: cooks){
         cook.stop();
