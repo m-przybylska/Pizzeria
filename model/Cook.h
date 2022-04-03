@@ -9,6 +9,7 @@
 #include <string>
 #include <atomic>
 #include <deque>
+#include <mutex>
 #include <condition_variable>
 #include "Oven.h"
 #include "Shelf.h"
@@ -29,9 +30,13 @@ class Cook {
 
     const std::string cookActionTag[5] = {"sink", "worktop", "oven", "shelf", "wait"};
 
-    static condition_variable queueSinkCV;
-    static condition_variable queueWorktopCV;
-    static condition_variable queueOvenCV;
+    std::mutex mutexSink;
+    std::mutex mutexWorktop;
+    std::mutex mutexOven;
+
+    static std::condition_variable queueSinkCV;
+    static std::condition_variable queueWorktopCV;
+    static std::condition_variable queueOvenCV;
 
     static int numberOfCooks;
     int numberOfBaked;
@@ -44,9 +49,9 @@ class Cook {
     atomic<int> progress;
 
 public:
-    static deque<int> queueSink;
-    static deque<int> queueWorktop;
-    static deque<int> queueOven;
+    static std::deque<int> queueSink;
+    static std::deque<int> queueWorktop;
+    static std::deque<int> queueOven;
 
     Cook();
 
