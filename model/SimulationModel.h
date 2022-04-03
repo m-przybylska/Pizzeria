@@ -6,9 +6,20 @@
 #define UNTITLED4_SIMULATIONMODEL_H
 
 
+#include "Oven.h"
+
 class SimulationModel {
+
+private:
+    int numberOfCooks = 7;
+    static bool simulationOn;
+
 public:
     SimulationModel();
+
+    static void getQ();
+
+    static void ovenThread(Oven *oven);
 
 };
 

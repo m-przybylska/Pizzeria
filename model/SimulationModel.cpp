@@ -13,16 +13,13 @@
 #include "Sink.h"
 #include "Worktop.h"
 
-const int numberOfCooks = 7;
-bool simulationOn = true;
-
-void ovenThread(Oven *oven){
+void SimulationModel::ovenThread(Oven *oven) {
     oven->live();
 }
 
-void getQ(){
+void SimulationModel::getQ() {
     char esc = getch();
-    while (esc != 'q'){
+    while (esc != 'q') {
         esc = getch();
     }
     simulationOn = false;
@@ -30,25 +27,30 @@ void getQ(){
 
 SimulationModel::SimulationModel() {
 
+    simulationOn = true;
     Shelf shelf;
     Oven oven;
     Sink sink;
     Worktop worktop;
 
     std::vector<Cook> cooks;
-    for (int i = 0; i < numberOfCooks; i++){
+    for (int i = 0; i < numberOfCooks; i++) {
         cooks.emplace_back(Cook());
     }
-    for (Cook& cook: cooks){
+    for (Cook &cook: cooks) {
         cook.start(&sink, &worktop, &oven, &shelf);
     }
     std::thread ovenT(ovenThread, &oven);
     std::thread end(getQ);
 
-    for (Cook& cook: cooks){
+    for (Cook &cook: cooks) {
         cook.stop();
     }
     oven.stop();
     ovenT.join();
     end.join();
 }
+
+
+
+
