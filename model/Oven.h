@@ -8,12 +8,6 @@
 #include <mutex>
 #include <vector>
 
-#ifndef UNTITLED4_OVEN_H
-#define UNTITLED4_OVEN_H
-#include <thread>
-#include <mutex>
-#include <vector>
-
 class Oven{
         struct pizza {
             int timeDoEndBacking;
