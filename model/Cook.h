@@ -9,6 +9,7 @@
 #include <string>
 #include <atomic>
 #include <deque>
+#include <mutex>
 #include <condition_variable>
 #include "Oven.h"
 #include "Shelf.h"
@@ -19,7 +20,7 @@ using namespace std;
 
 class Cook {
 
-    enum cookAction{
+    enum cookAction {
         SINK,
         WORKTOP,
         OVEN,
@@ -29,11 +30,15 @@ class Cook {
 
     const std::string cookActionTag[5] = {"sink", "worktop", "oven", "shelf", "wait"};
 
-    static condition_variable queueSinkCV;
-    static condition_variable queueWorktopCV;
-    static condition_variable queueOvenCV;
+    std::mutex mutexSink;
+    std::mutex mutexWorktop;
+    std::mutex mutexOven;
 
-    static int numberOfCooks; 
+    static std::condition_variable queueSinkCV;
+    static std::condition_variable queueWorktopCV;
+    static std::condition_variable queueOvenCV;
+
+    static int numberOfCooks;
     int numberOfBaked;
 
     atomic<bool> isAlive;
@@ -44,31 +49,44 @@ class Cook {
     atomic<int> progress;
 
 public:
-    static deque<int> queueSink;
-    static deque<int> queueWorktop;
-    static deque<int> queueOven;
+    static std::deque<int> queueSink;
+    static std::deque<int> queueWorktop;
+    static std::deque<int> queueOven;
 
     Cook();
-    Cook(const Cook& cook);
+
+    Cook(const Cook &cook);
+
     virtual ~Cook();
 
     void useSink(Sink *sink);
+
     void useWorktop(Worktop *worktop);
+
     void useOven(Oven *oven);
+
     void useShelf(Shelf *shelf);
 
     void sleep(int min, int max);
+
     int random(int min, int max);
-    void live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf);
+
+    void live(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf);
 
     int getNumberOfCook() const;
+
     int getIsAlive() const;
+
     std::string getAction();
+
     int getProgress() const;
+
     int getActuallyProducing() const;
 
-    void start(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf);
+    void start(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf);
+
     void stop();
 
 };
+
 #endif

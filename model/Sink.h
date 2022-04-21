@@ -15,7 +15,9 @@ public:
     virtual ~Sink();
 
     void startUsing();
+
     void stopUsing();
+
     bool isBeingUsed();
 
 };

@@ -17,8 +17,8 @@ void Oven::putIn() {
 int Oven::takeOut() {
     int takenOut = 0;
     std::lock_guard<std::mutex> guard(notBakedMutex);
-    for (auto it = notBaked.begin(); it != notBaked.end(); ++it){
-        if ( it->timeDoEndBacking <= 0){
+    for (auto it = notBaked.begin(); it != notBaked.end(); ++it) {
+        if (it->timeDoEndBacking <= 0) {
             takenOut++;
             notBaked.erase(it);
             --it;
@@ -28,17 +28,17 @@ int Oven::takeOut() {
 }
 
 void Oven::bakeAll() {
-    if(notBaked.size() < 5) {
-        std::lock_guard <std::mutex> guard(notBakedMutex);
+    if (notBaked.size() < 5) {
+        std::lock_guard<std::mutex> guard(notBakedMutex);
         for (pizza &pizza: notBaked) {
             pizza.bake();
         }
     }
 }
 
-void Oven::live(){
+void Oven::live() {
     functioning = true;
-    while (functioning){
+    while (functioning) {
         bakeAll();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
@@ -48,12 +48,12 @@ void Oven::stop() {
     functioning = false;
 }
 
-int Oven::getRemainingTime(int i){
+int Oven::getRemainingTime(int i) {
     std::lock_guard<std::mutex> guard(notBakedMutex);
     return notBaked[i].timeDoEndBacking;
 }
 
-int Oven::getSize(){
+int Oven::getSize() {
     std::lock_guard<std::mutex> guard(notBakedMutex);
     return notBaked.size();
 }

@@ -7,10 +7,17 @@
 
 
 class ThermalBag {
+    int pizzas;
+    const int maxAmount = 20;
+
 public:
     ThermalBag();
 
     virtual ~ThermalBag();
+
+    void add(int amount);
+
+    bool take();
 
 };
 

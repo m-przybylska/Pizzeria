@@ -7,7 +7,6 @@
 #include "Cook.h"
 
 int Cook::numberOfCooks = 0;
-
 std::deque<int> Cook::queueSink;
 std::deque<int> Cook::queueWorktop;
 std::deque<int> Cook::queueOven;
@@ -22,111 +21,135 @@ Cook::Cook() {
     isAlive = false;
     action = WAIT;
     progress = 0;
+    numberOfBaked = 0;
 }
 
-Cook::Cook(const Cook &Cook){
+Cook::Cook(const Cook &Cook) {
     this->numberOfCook = Cook.numberOfCook;
 }
 
 Cook::~Cook() {
-    if (life.joinable()){
+    if (life.joinable()) {
         life.join();
     }
 }
 
-void Cook::useSink(Sink *sink){
+void Cook::useSink(Sink *sink) {
     action = WAIT;
+    cout<< numberOfCook <<  " : " +getAction()<< endl;
 
+    mutexSink.lock();
     queueSink.push_back(numberOfCook);
+    mutexSink.unlock();
 
-    // {
-    //     queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
-    // }
+     {
+         std::unique_lock<std::mutex> lck(mutexSink);
+         queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
+     }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueSinkCV.notify_all();
         return;
     }
 
     sink->startUsing();
     action = SINK;
-    sleep(500,2000);
+    sleep(500, 2000);
+    cout<< numberOfCook << " : " +getAction()<< endl;
     sink->stopUsing();
 
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
+    mutexSink.lock();
     queueSink.pop_front();
+    mutexSink.unlock();
 
     queueSinkCV.notify_all();
-
 }
 
-void Cook::useWorktop(Worktop *worktop){
+void Cook::useWorktop(Worktop *worktop) {
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
+    mutexWorktop.lock();
     queueWorktop.push_back(numberOfCook);
+    mutexWorktop.unlock();
 
-    // {
-    //     std::unique_lock<std::mutex> lck(queueWorktopMutex);
-    //     queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
-    // }
+     {
+         std::unique_lock<std::mutex> lck(mutexWorktop);
+         queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
+     }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueWorktopCV.notify_all();
         return;
     }
 
-
     worktop->startUsing();
     action = WORKTOP;
-    sleep(1000,3000);
+
+    sleep(1000, 3000);
+    cout<< numberOfCook << " : " +getAction()<< endl;
     worktop->stopUsing();
 
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
+    mutexWorktop.lock();
     queueWorktop.pop_front();
+    mutexWorktop.unlock();
 
     queueWorktopCV.notify_all();
 }
 
-void Cook::useOven(Oven *oven){
+void Cook::useOven(Oven *oven) {
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
+    mutexOven.lock();
     queueOven.push_back(numberOfCook);
+    mutexOven.unlock();
 
-    // {
-    //     std::unique_lock<std::mutex> lck(queueOvenMutex);
-    //     queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
-    // }
+     {
+         std::unique_lock<std::mutex> lck(mutexOven);
+         queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
+     }
 
-    if (!isAlive){
+    if (!isAlive) {
         queueOvenCV.notify_all();
         return;
     }
 
     oven->putIn();
     action = OVEN;
-    sleep(500,1000);
+    sleep(500, 1000);
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
-    numberOfBaked = oven->takeOut();
+    oven->takeOut();
+
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
+    mutexOven.lock();
     queueOven.pop_front();
+    mutexOven.unlock();
 
     queueOvenCV.notify_all();
 }
 
-void Cook::useShelf(Shelf *shelf)
-{
+void Cook::useShelf(Shelf *shelf) {
     action = SHELF;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 
-    shelf->add(numberOfBaked);
+    shelf->add(1);
     sleep(100, 500);
     action = WAIT;
+    cout<< numberOfCook << " : " +getAction()<< endl;
 }
 
 int Cook::random(const int min, const int max) {
-    static thread_local mt19937* generator = nullptr;
+    static thread_local mt19937 *generator = nullptr;
     static hash<thread::id> hasher;
 
     if (!generator) {
@@ -137,12 +160,12 @@ int Cook::random(const int min, const int max) {
     return distribution(*generator);
 }
 
-void Cook::sleep(int min, int max){
-    int s = random(min,max)/100;
+void Cook::sleep(int min, int max) {
+    int s = random(min, max) / 100;
 
-    for (int i = 0; i < s; i++){
+    for (int i = 0; i < s; i++) {
         this_thread::sleep_for(chrono::milliseconds(100));
-        this->progress = 100*i/s;
+        this->progress = 100 * i / s;
 
         if (!this->isAlive) {
             return;
@@ -150,8 +173,8 @@ void Cook::sleep(int min, int max){
     }
 }
 
-void Cook::live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
-    while(this->isAlive){
+void Cook::live(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf) {
+    while (this->isAlive) {
         action = WAIT;
         useSink(sink);
         useWorktop(worktop);
@@ -160,27 +183,27 @@ void Cook::live(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
     }
 }
 
-int Cook::getNumberOfCook() const{
+int Cook::getNumberOfCook() const {
     return numberOfCook;
 }
 
-int Cook::getIsAlive() const{
+int Cook::getIsAlive() const {
     return isAlive;
 }
 
-string Cook::getAction(){
+string Cook::getAction() {
     return cookActionTag[action];
 }
 
-int Cook::getProgress() const{
+int Cook::getProgress() const {
     return progress;
 }
 
-void Cook::start(Sink *sink, Worktop *worktop, Oven* oven, Shelf* shelf){
+void Cook::start(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf) {
     isAlive = true;
-    life = thread(&Cook::live, this, sink, worktop, oven, shelf);
+    life = std::thread(&Cook::live, this, sink, worktop, oven, shelf);
 }
 
-void Cook::stop(){
+void Cook::stop() {
     isAlive = false;
 }

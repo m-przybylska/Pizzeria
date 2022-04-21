@@ -4,7 +4,7 @@
 
 #include "Shelf.h"
 
-Shelf::Shelf(){
+Shelf::Shelf() {
 
 }
 
@@ -12,18 +12,23 @@ Shelf::~Shelf() {
 
 }
 
-void Shelf::add(int amount){
+void Shelf::add(int amount) {
     pizzas += amount;
 }
 
-bool Shelf::take(){
-    if (pizzas > 0){
-        pizzas--;
-        return true;
+int Shelf::take(int amount) {
+
+    if (pizzas - amount > 0) {
+        pizzas-=amount;
+        return amount;
+    }else{
+        amount = pizzas;
+        pizzas = 0;
+        return amount;
     }
-    return false;
+    return 0;
 }
 
-int Shelf::get(){
+int Shelf::get() {
     return pizzas;
 }

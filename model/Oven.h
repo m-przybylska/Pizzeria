@@ -4,19 +4,20 @@
 
 #ifndef UNTITLED4_OVEN_H
 #define UNTITLED4_OVEN_H
+
 #include <thread>
 #include <mutex>
 #include <vector>
 
-class Oven{
-        struct pizza {
-            int timeDoEndBacking;
+class Oven {
+    struct pizza {
+        int timeDoEndBacking;
 
-            void bake(){
-                if (this-> timeDoEndBacking > 0)
-                    this->timeDoEndBacking -= 100;
-            }
-        };
+        void bake() {
+            if (this->timeDoEndBacking > 0)
+                this->timeDoEndBacking -= 100;
+        }
+    };
 
 private:
     const int maxAmmout = 4;
