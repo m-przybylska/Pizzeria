@@ -20,13 +20,13 @@ const int numberOfCooks = 7;
 const int numberOfDeliveryMan = 2;
 bool simulationOn = true;
 
-void ovenThread(Oven *oven){
+void ovenThread(Oven *oven) {
     oven->live();
 }
 
-void getQ(){
+void getQ() {
     char esc = getch();
-    while (esc != 'q'){
+    while (esc != 'q') {
         esc = getch();
     }
     simulationOn = false;
@@ -34,6 +34,9 @@ void getQ(){
 
 SimulationModel::SimulationModel() {
 
+}
+
+void SimulationModel::doSimulation() {
     Shelf shelf;
     Oven oven;
     Sink sink;
@@ -45,37 +48,38 @@ SimulationModel::SimulationModel() {
     std::vector<Cook> cooks;
     std::vector<DeliveryMan> deliveryMen;
 
-    for (int i = 0; i < numberOfCooks; i++){
+    for (int i = 0; i < numberOfCooks; i++) {
         cooks.emplace_back(Cook());
     }
 
-    for (int i = 0; i < numberOfDeliveryMan; i++){
+    for (int i = 0; i < numberOfDeliveryMan; i++) {
         deliveryMen.emplace_back(DeliveryMan());
     }
 
-    for (Cook& cook: cooks){
+    for (Cook &cook: cooks) {
         cook.start(&sink, &worktop, &oven, &shelf);
     }
 
-    for (DeliveryMan& deliveryMan: deliveryMen){
+    for (DeliveryMan &deliveryMan: deliveryMen) {
         deliveryMan.start(&thermalBag, &shelf);
     }
 
     std::thread ovenT(ovenThread, &oven);
     std::thread end(getQ);
 
-   while(simulationOn){
-   }
+    while (simulationOn) {
+    }
 
-    for (Cook& cook: cooks){
+    for (Cook &cook: cooks) {
         cook.stop();
     }
 
-    for (DeliveryMan& deliveryMan: deliveryMen){
+    for (DeliveryMan &deliveryMan: deliveryMen) {
         deliveryMan.stop();
     }
 
     oven.stop();
     ovenT.join();
     end.join();
+
 }

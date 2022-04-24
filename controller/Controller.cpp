@@ -4,8 +4,8 @@
 
 #include "model/SimulationModel.h"
 
-int main(){
+int main() {
     SimulationModel *simulationModel = new SimulationModel();
-
+    simulationModel->doSimulation();
     return 0;
 }

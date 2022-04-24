@@ -9,7 +9,7 @@
 class SimulationModel {
 public:
     SimulationModel();
-
+    void doSimulation();
 };
 
 
