@@ -24,4 +24,4 @@ add_executable(Systemy_operacyjne_2__projekt
         model/Worktop.cpp
         model/Worktop.h
         controller/Controller.cpp
-        )
+        model/Entity.cpp model/Entity.h)

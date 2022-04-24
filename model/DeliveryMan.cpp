@@ -3,6 +3,7 @@
 //
 
 #include "DeliveryMan.h"
+#include "Entity.h"
 #include <random>
 #include <iostream>
 
@@ -19,7 +20,7 @@ DeliveryMan::DeliveryMan() {
 }
 
 DeliveryMan::DeliveryMan(const DeliveryMan &DeliveryMan) {
-    this->id = DeliveryMan.numberOfDeliveryMan;
+    this->id = DeliveryMan.id;
 }
 
 DeliveryMan::~DeliveryMan() {
@@ -52,8 +53,7 @@ void DeliveryMan::start(ThermalBag *thermalBag, Shelf *shelf) {
 
 void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
     action = WAIT;
-    cout<< id << " : " +getAction()<< endl;
-
+    printAction("Delivery man", getAction(), id);
     mutexThermalBag.lock();
     queueThermalBag.push_back(numberOfDeliveryMan);
     mutexThermalBag.unlock();
@@ -69,14 +69,14 @@ void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
     }
 
     action = ADD;
-    cout<< id << " : " +getAction()<< endl;
+    printAction("Delivery man", getAction(), id);
 
     int adding = shelf->take(20);
     thermalBag->add(adding);
     sleep(500, 2000);
 
     action = WAIT;
-    cout<< id << " : " +getAction()<< endl;
+    printAction("Delivery man", getAction(), id);
 
     mutexThermalBag.lock();
     queueThermalBag.pop_front();
@@ -87,12 +87,12 @@ void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
 
 void DeliveryMan::go(){
     action = GO;
-    cout<< id << " : " +getAction()<< endl;
+    printAction("Delivery man", getAction(), id);
 
     sleep(1500, 2500);
 
     action = WAIT;
-    cout<< id << " : " +getAction()<< endl;
+    printAction("Delivery man", getAction(), id);
 }
 
 int DeliveryMan::random(const int min, const int max) {

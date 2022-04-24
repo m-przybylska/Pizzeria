@@ -31,6 +31,7 @@ class DeliveryMan {
     static std::condition_variable queueThermalBagCV;
     static int numberOfDeliveryMan;
 
+
 public:
     static std::deque<int> queueThermalBag;
 

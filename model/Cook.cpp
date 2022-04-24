@@ -4,6 +4,7 @@
 
 #include <random>
 #include <iostream>
+#include "Entity.h"
 #include "Cook.h"
 
 int Cook::numberOfCooks = 0;
@@ -36,7 +37,7 @@ Cook::~Cook() {
 
 void Cook::useSink(Sink *sink) {
     action = WAIT;
-    cout<< numberOfCook <<  " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexSink.lock();
     queueSink.push_back(numberOfCook);
@@ -55,11 +56,11 @@ void Cook::useSink(Sink *sink) {
     sink->startUsing();
     action = SINK;
     sleep(500, 2000);
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
     sink->stopUsing();
 
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexSink.lock();
     queueSink.pop_front();
@@ -70,7 +71,7 @@ void Cook::useSink(Sink *sink) {
 
 void Cook::useWorktop(Worktop *worktop) {
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexWorktop.lock();
     queueWorktop.push_back(numberOfCook);
@@ -90,11 +91,11 @@ void Cook::useWorktop(Worktop *worktop) {
     action = WORKTOP;
 
     sleep(1000, 3000);
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
     worktop->stopUsing();
 
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexWorktop.lock();
     queueWorktop.pop_front();
@@ -105,7 +106,7 @@ void Cook::useWorktop(Worktop *worktop) {
 
 void Cook::useOven(Oven *oven) {
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexOven.lock();
     queueOven.push_back(numberOfCook);
@@ -129,7 +130,7 @@ void Cook::useOven(Oven *oven) {
     oven->takeOut();
 
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     mutexOven.lock();
     queueOven.pop_front();
@@ -140,12 +141,12 @@ void Cook::useOven(Oven *oven) {
 
 void Cook::useShelf(Shelf *shelf) {
     action = SHELF;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 
     shelf->add(1);
     sleep(100, 500);
     action = WAIT;
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    printAction("Cook", getAction(), numberOfCook);
 }
 
 int Cook::random(const int min, const int max) {

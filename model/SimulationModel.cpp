@@ -16,8 +16,6 @@
 #include "ThermalBag.h"
 #include "DeliveryMan.h"
 
-const int numberOfCooks = 7;
-const int numberOfDeliveryMan = 2;
 bool simulationOn = true;
 
 void ovenThread(Oven *oven) {
@@ -37,16 +35,6 @@ SimulationModel::SimulationModel() {
 }
 
 void SimulationModel::doSimulation() {
-    Shelf shelf;
-    Oven oven;
-    Sink sink;
-    Worktop worktop;
-    Cook cook;
-    DeliveryMan deliveryMan;
-    ThermalBag thermalBag;
-
-    std::vector<Cook> cooks;
-    std::vector<DeliveryMan> deliveryMen;
 
     for (int i = 0; i < numberOfCooks; i++) {
         cooks.emplace_back(Cook());
