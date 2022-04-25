@@ -19,9 +19,9 @@ void Shelf::add(int amount) {
 int Shelf::take(int amount) {
 
     if (pizzas - amount > 0) {
-        pizzas-=amount;
+        pizzas -= amount;
         return amount;
-    }else{
+    } else {
         amount = pizzas;
         pizzas = 0;
         return amount;

@@ -29,15 +29,15 @@ DeliveryMan::~DeliveryMan() {
     }
 }
 
-void DeliveryMan::live(ThermalBag *thermalBag, Shelf *shelf){
+void DeliveryMan::live(ThermalBag *thermalBag, Shelf *shelf) {
     while (this->isAlive) {
         action = WAIT;
-        useThermalBag(thermalBag, shelf );
+        useThermalBag(thermalBag, shelf);
         go();
     }
 }
 
-void DeliveryMan::stop(){
+void DeliveryMan::stop() {
     isAlive = false;
 }
 
@@ -51,7 +51,7 @@ void DeliveryMan::start(ThermalBag *thermalBag, Shelf *shelf) {
     life = std::thread(&DeliveryMan::live, this, thermalBag, shelf);
 }
 
-void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
+void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf) {
     action = WAIT;
     printAction("Delivery man", getAction(), id);
     mutexThermalBag.lock();
@@ -60,7 +60,9 @@ void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
 
     {
         std::unique_lock<std::mutex> lck(mutexThermalBag);
-        queueThermalBagCV.wait(lck, [this] { return queueThermalBag.front() == this->numberOfDeliveryMan || !this->isAlive; });
+        queueThermalBagCV.wait(lck, [this] {
+            return queueThermalBag.front() == this->numberOfDeliveryMan || !this->isAlive;
+        });
     }
 
     if (!isAlive) {
@@ -85,7 +87,7 @@ void DeliveryMan::useThermalBag(ThermalBag *thermalBag, Shelf *shelf){
     queueThermalBagCV.notify_all();
 }
 
-void DeliveryMan::go(){
+void DeliveryMan::go() {
     action = GO;
     printAction("Delivery man", getAction(), id);
 

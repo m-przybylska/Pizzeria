@@ -43,10 +43,10 @@ void Cook::useSink(Sink *sink) {
     queueSink.push_back(numberOfCook);
     mutexSink.unlock();
 
-     {
-         std::unique_lock<std::mutex> lck(mutexSink);
-         queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
-     }
+    {
+        std::unique_lock<std::mutex> lck(mutexSink);
+        queueSinkCV.wait(lck, [this] { return queueSink.front() == this->numberOfCook || !this->isAlive; });
+    }
 
     if (!isAlive) {
         queueSinkCV.notify_all();
@@ -77,10 +77,10 @@ void Cook::useWorktop(Worktop *worktop) {
     queueWorktop.push_back(numberOfCook);
     mutexWorktop.unlock();
 
-     {
-         std::unique_lock<std::mutex> lck(mutexWorktop);
-         queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
-     }
+    {
+        std::unique_lock<std::mutex> lck(mutexWorktop);
+        queueWorktopCV.wait(lck, [this] { return queueWorktop.front() == this->numberOfCook || !this->isAlive; });
+    }
 
     if (!isAlive) {
         queueWorktopCV.notify_all();
@@ -112,10 +112,10 @@ void Cook::useOven(Oven *oven) {
     queueOven.push_back(numberOfCook);
     mutexOven.unlock();
 
-     {
-         std::unique_lock<std::mutex> lck(mutexOven);
-         queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
-     }
+    {
+        std::unique_lock<std::mutex> lck(mutexOven);
+        queueOvenCV.wait(lck, [this] { return queueOven.front() == this->numberOfCook || !this->isAlive; });
+    }
 
     if (!isAlive) {
         queueOvenCV.notify_all();
@@ -125,7 +125,7 @@ void Cook::useOven(Oven *oven) {
     oven->putIn();
     action = OVEN;
     sleep(500, 1000);
-    cout<< numberOfCook << " : " +getAction()<< endl;
+    cout << numberOfCook << " : " + getAction() << endl;
 
     oven->takeOut();
 

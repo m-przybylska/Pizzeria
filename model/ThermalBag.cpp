@@ -13,7 +13,7 @@ ThermalBag::~ThermalBag() {
 }
 
 void ThermalBag::add(int amount) {
-    pizzas+=amount;
+    pizzas += amount;
 
 }
 

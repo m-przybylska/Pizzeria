@@ -10,14 +10,14 @@ Worktop::~Worktop() {
 
 }
 
-void Worktop::startUsing(){
+void Worktop::startUsing() {
     isLocked = true;
 }
 
-void Worktop::stopUsing(){
+void Worktop::stopUsing() {
     isLocked = false;
 }
 
-bool Worktop::isBeingUsed(){
+bool Worktop::isBeingUsed() {
     return isLocked;
 }

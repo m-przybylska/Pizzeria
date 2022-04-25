@@ -4,6 +4,6 @@
 
 #include "Entity.h"
 
-void printAction(std::string role, std::string action, int id){
-    std::cout<<role<<" "<<id<<": "<<action<<"\n";
+void printAction(std::string role, std::string action, int id) {
+    std::cout << role << " " << id << ": " << action << "\n";
 }

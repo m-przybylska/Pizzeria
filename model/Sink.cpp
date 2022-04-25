@@ -10,14 +10,14 @@ Sink::~Sink() {
 
 }
 
-void Sink::startUsing(){
+void Sink::startUsing() {
     isLocked = true;
 }
 
-void Sink::stopUsing(){
+void Sink::stopUsing() {
     isLocked = false;
 }
 
-bool Sink::isBeingUsed(){
+bool Sink::isBeingUsed() {
     return isLocked;
 }
