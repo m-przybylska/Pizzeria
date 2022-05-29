@@ -83,8 +83,6 @@ public:
 
     int getProgress() const;
 
-    int getActuallyProducing() const;
-
     void start(Sink *sink, Worktop *worktop, Oven *oven, Shelf *shelf);
 
     void stop();
