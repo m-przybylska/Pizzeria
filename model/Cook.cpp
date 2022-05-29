@@ -125,7 +125,7 @@ void Cook::useOven(Oven *oven) {
     oven->putIn();
     action = OVEN;
     sleep(500, 1000);
-    cout << numberOfCook << " : " + getAction() << endl;
+    //cout << numberOfCook << " : " + getAction() << endl;
 
     oven->takeOut();
 

@@ -23,5 +23,5 @@ add_executable(Systemy_operacyjne_2__projekt
         model/ThermalBag.h
         model/Worktop.cpp
         model/Worktop.h
-        controller/Controller.cpp
+        model/Controller.cpp
         model/Entity.cpp model/Entity.h)
