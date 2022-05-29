@@ -45,6 +45,9 @@ std::string DeliveryMan::getAction() {
     return deliveryManActionTag[action];
 }
 
+int DeliveryMan::getNumberOfDeliveryMan() {
+    return id;
+}
 
 void DeliveryMan::start(ThermalBag *thermalBag, Shelf *shelf) {
     isAlive = true;

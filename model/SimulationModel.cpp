@@ -29,46 +29,69 @@ SimulationModel::SimulationModel() {
 
 void displayCook(Cook& cook){
     static std::array<int, 5> positionsH{5, 20, 35, 45, 60};
-    static std::array<std::string, 8> names{"", "Maciek", "Janek", "Piotrek", "Mikolaj", "Wojtek", "Marek", "Kuba"};
     static std::array<int, 8> positionsV{0, 1, 13, 25, 37, 49, 61, 73};
     attron( COLOR_PAIR( 1 ) );
-    mvprintw(positionsV[cook.getNumberOfCook()], positionsH[char(cook.action)], "      *       ");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 1, positionsH[char(cook.action)] , "   *****    ");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 2, positionsH[char(cook.action)], "   *******   ");
+    mvprintw(positionsV[cook.getNumberOfCook()], positionsH[char(cook.action)], "      ***       ");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 1, positionsH[char(cook.action)] , "   *******    ");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 2, positionsH[char(cook.action)], "   *********   ");
     mvprintw(positionsV[cook.getNumberOfCook()] + 3, positionsH[char(cook.action)], "/\* ### ### *\\");
     mvprintw(positionsV[cook.getNumberOfCook()] + 4, positionsH[char(cook.action)], "|    @ / @    |");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 5, positionsH[char(cook.action)], "\/\    ^    /\/");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 6, positionsH[char(cook.action)], "   \  ===  /    ");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 5, positionsH[char(cook.action)], "\/\      ^    /\/");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 6, positionsH[char(cook.action)], "   \   === /    ");
     mvprintw(positionsV[cook.getNumberOfCook()] + 7, positionsH[char(cook.action)], "    \_____/     ");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 8, positionsH[char(cook.action)], "     |_|     ");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 9, positionsH[char(cook.action)], "  $$$$$$$$$   ");
-    mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Maciej");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 8, positionsH[char(cook.action)], "     _|_|_     ");
+    mvprintw(positionsV[cook.getNumberOfCook()] + 9, positionsH[char(cook.action)], "  *$$$$$$$$$*   ");
     attroff( COLOR_PAIR( 1 ) );
-    //
-    //mvprintw(positionsV[cook.getNumberOfCook()] + 5, positionsH[char(cook.action)] + 2, names[cook.getNumberOfCook()]);
-    //switch(cook.getNumberOfCook()){
-    //case 1:
-    //mvprintw(15, positions[char(cook.action)], "Maciek");
-    //break;
-    //case 2:
-    //mvprintw(25, positions[char(cook.action)], "Janek");
-    //break;
-    //case 3:
-    //mvprintw(35, positions[char(cook.action)], "Piotrek");
-    //break;
-    //case 4:
-    //mvprintw(45, positions[char(cook.action)], "Mikolaj");
-    //break;
-    //case 5:
-    //mvprintw(55, positions[char(cook.action)], "Wojtek");
-    //break;
-    //case 6:
-    //mvprintw(65, positions[char(cook.action)], "Marek");
-    //break;
-    //case 7:
-    //mvprintw(75, positions[char(cook.action)], "Kuba");
-    //break;
-    // }
+
+    switch(cook.getNumberOfCook()){
+        case 1:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Maciej");
+            break;
+        case 2:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Janek");
+            break;
+        case 3:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Albert");
+            break;
+        case 4:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Mikolaj");
+            break;
+        case 5:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Wojtek");
+            break;
+        case 6:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Marek");
+            break;
+        case 7:
+            mvprintw(positionsV[cook.getNumberOfCook()] + 10, positionsH[char(cook.action)],  "Kuba");
+            break;
+    }
+}
+
+void displayDeliver(DeliveryMan& deliveryMan){
+    static std::array<int, 3> positionsH{80, 95, 110};
+    static std::array<int, 8> positionsV{0, 1, 13};
+    attron( COLOR_PAIR( 3 ) );
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()], positionsH[char(deliveryMan.action)], "      ***       ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 1, positionsH[char(deliveryMan.action)] , "   *******    ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 2, positionsH[char(deliveryMan.action)], "   *********   ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 3, positionsH[char(deliveryMan.action)], "/\* ### ### *\\");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 4, positionsH[char(deliveryMan.action)], "|    @ / @    |");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 5, positionsH[char(deliveryMan.action)], "\/\      ^    /\/");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 6, positionsH[char(deliveryMan.action)], "   \   === /    ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 7, positionsH[char(deliveryMan.action)], "    \_____/     ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 8, positionsH[char(deliveryMan.action)], "     _|_|_     ");
+    mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 9, positionsH[char(deliveryMan.action)], "  *$$$$$$$$$*   ");
+    attroff( COLOR_PAIR( 3 ) );
+    switch(deliveryMan.getNumberOfDeliveryMan()){
+        case 1:
+            mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 10, positionsH[char(deliveryMan.action)],  "Piotr");
+            break;
+        case 2:
+            mvprintw(positionsV[deliveryMan.getNumberOfDeliveryMan()] + 10, positionsH[char(deliveryMan.action)],  "Pawel");
+            break;
+    }
+
 }
 
 void SimulationModel::displayObjects(){
@@ -79,26 +102,22 @@ void SimulationModel::displayObjects(){
     mvprintw(0, 35, "OVEN");
     mvprintw(0, 45, "SHELF");
     mvprintw(0, 60, "WAIT");
+    mvprintw(0, 80, "ADD");
+    mvprintw(0, 95, "GO");
+    mvprintw(0, 110, "WAIT");
     attroff( COLOR_PAIR( 2 ) );
     attroff(A_BOLD);
     for(auto& cook : cooks)
     {
         displayCook(cook);
     }
-
-}
-
-
-void displayDeliver(int x_position, int deliverIndeks){
-    switch(deliverIndeks){
-        case 1:
-            mvprintw(15, x_position, "Antek");
-            break;
-        case 2:
-            mvprintw(25, x_position, "Tadek");
-            break;
+    for(auto& deliveryMan : deliveryMen)
+    {
+        displayDeliver(deliveryMan);
     }
+
 }
+
 
 void SimulationModel::doSimulation() {
 
@@ -108,6 +127,7 @@ void SimulationModel::doSimulation() {
     start_color(); //2
     init_pair( 1, COLOR_CYAN, COLOR_BLACK );
     init_pair( 2, COLOR_MAGENTA, COLOR_BLACK );
+    init_pair( 3, COLOR_GREEN, COLOR_BLACK );
 
     for (int i = 0; i < numberOfCooks; i++) {
         cooks.emplace_back(Cook());

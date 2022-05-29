@@ -25,7 +25,6 @@ class DeliveryMan {
     int id = -1;
     std::thread life;
     std::atomic<bool> isAlive;
-    std::atomic<deliveryManAction> action;
 
     std::mutex mutexThermalBag;
     static std::condition_variable queueThermalBagCV;
@@ -33,6 +32,8 @@ class DeliveryMan {
 
 
 public:
+    std::atomic<deliveryManAction> action;
+
     static std::deque<int> queueThermalBag;
 
     DeliveryMan();
@@ -46,6 +47,8 @@ public:
     void stop();
 
     void start(ThermalBag *thermalBag, Shelf *shelf);
+
+    int getNumberOfDeliveryMan();
 
     std::string getAction();
 
