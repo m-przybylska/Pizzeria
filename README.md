@@ -28,5 +28,8 @@ No pizza will be made, the chefs will never wash their hands, the pizzas on the 
 ## Technologies
 The project is made in C++ language and the animation was done using the ncurses library.
 
+![](https://github.com/m-przybylska/Pizzeria/blob/master/252783_252744.png)
+
+
 
 
