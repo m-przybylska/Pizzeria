@@ -45,10 +45,12 @@ class Cook {
     int numberOfCook = -1;
     thread life;
 
-    atomic<cookAction> action;
     atomic<int> progress;
 
 public:
+
+
+    atomic<cookAction> action;
     static std::deque<int> queueSink;
     static std::deque<int> queueWorktop;
     static std::deque<int> queueOven;
